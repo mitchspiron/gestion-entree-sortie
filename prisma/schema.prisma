@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model bondeentree {
+  numBondeEntree Int      @id @default(autoincrement())
+  numProduit     Int
+  qteEntree      Int
+  dateEntree     DateTime @default(now())
+  produit        produit  @relation(fields: [numProduit], references: [numProduit], onDelete: Cascade, map: "bondeentree_ibfk_1")
+
+  @@index([numProduit], map: "numProduit")
+  @@map("bondeentrees")
+}
+
+model bondesortie {
+  numBondeSortie Int      @id @default(autoincrement())
+  numProduit     Int
+  qteSortie      Int
+  dateSortie     DateTime @default(now())
+  produit        produit  @relation(fields: [numProduit], references: [numProduit], onDelete: Cascade, map: "bondesortie_ibfk_1")
+
+  @@index([numProduit], map: "numProduit")
+  @@map("bondesorties")
+}
+
+model produit {
+  numProduit  Int           @id @default(autoincrement())
+  design      String        @db.VarChar(50)
+  stock       Int
+  bondeentree bondeentree[]
+  bondesortie bondesortie[]
+
+  @@map("produits")
+}
