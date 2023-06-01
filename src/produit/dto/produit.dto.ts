@@ -1,15 +1,15 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class BookDto {
+export class ProduitDto {
   @IsNotEmpty()
   @IsString()
-  title: string;
-
-  @IsNotEmpty()
-  @IsString()
-  author: string;
+  design: string;
 
   @IsNotEmpty()
   @IsNumber()
-  publishYear: number;
+  stock: number;
+}
+
+export class SearchProduitDto {
+  searchkey: string;
 }
