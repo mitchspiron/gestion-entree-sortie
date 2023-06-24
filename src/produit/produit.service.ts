@@ -21,8 +21,8 @@ export class ProduitService {
 
   async getMouvementStock() {
     return await this.dbService.$queryRaw`
-    SELECT CONCAT('BS','',bondesorties.numBondeSortie) AS bon, bondesorties.numProduit, bondesorties.qteSortie, bondesorties.dateSortie FROM bondesorties UNION
-    SELECT CONCAT('BE','',bondeentrees.numBondeEntree) AS bon, bondeentrees.numProduit, bondeentrees.qteEntree, bondeentrees.dateEntree FROM bondeentrees
+    SELECT CONCAT('BS','',bondesorties.numBondeSortie) AS bon, bondesorties.numProduit, bondesorties.qteSortie AS qte, bondesorties.dateSortie AS date FROM bondesorties UNION
+    SELECT CONCAT('BE','',bondeentrees.numBondeEntree) AS bon, bondeentrees.numProduit, bondeentrees.qteEntree AS qte, bondeentrees.dateEntree AS date FROM bondeentrees;
     `;
   }
 
